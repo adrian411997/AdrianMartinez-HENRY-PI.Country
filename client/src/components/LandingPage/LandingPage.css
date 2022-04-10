@@ -1,0 +1,46 @@
+.contenedor {
+  background: url(../../images/cielo.jpg) no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+.png {
+  text-align: center;
+}
+.globe {
+  padding-top: 10px;
+  margin-top: 50px;
+  height: 500px;
+}
+.text-legend-firstPart {
+  color: #ffff;
+  padding-left: 10px;
+  font-size: 60px;
+}
+.text-legend-secondPart {
+  color: #ffff;
+  font-size: 60px;
+  padding-right: 10px;
+  text-align: right;
+}
+.content-svg {
+  height: 150px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+.svg {
+  height: 100%;
+  width: 100%;
+}
+.path {
+  stroke: none;
+  fill: #08f;
+}
+.enlace {
+  margin-top: 10px;
+  text-align: center;
+}
+.enlace > a {
+  font-size: 30px;
+}

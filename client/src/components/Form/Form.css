@@ -1,0 +1,33 @@
+.formulario-area {
+  width: 100%;
+}
+.formulario-cuerpo {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+
+  transform: translate(-50%);
+  border: 1px solid black;
+  border-radius: 0.25rem;
+}
+.title-form {
+  padding: 10px;
+  text-align: center;
+}
+.name,
+.season,
+.difficulty,
+.duration,
+.country {
+  margin-top: 30px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 20px;
+}
+.button {
+  margin-top: 20px;
+  text-align: center;
+}
+.button > button {
+  width: 100%;
+}
