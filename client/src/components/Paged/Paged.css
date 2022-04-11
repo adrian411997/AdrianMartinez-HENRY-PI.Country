@@ -1,18 +1,17 @@
 .pageNumbers {
-    list-style: none;
-    display: flex;
-    justify-content:center;
-    margin: 10px;
-    padding: 10px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
 }
 
-.pageNumbers li {
-    padding: 10px;
-    border: 1px solid white;
-    cursor: pointer;
+.pageNumbers li > button {
+  cursor: pointer;
+  margin: 10px;
 }
 
-.pageNumbers li.active {
-    background-color: white;
-    color: black;
+.pageNumbers li > .active {
+  background-color: white;
+  color: black;
 }

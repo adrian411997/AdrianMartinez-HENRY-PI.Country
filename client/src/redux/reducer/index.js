@@ -8,7 +8,6 @@ import {
   SET_ORDER,
   ORDER_BY_POPULATION,
   FILTER_BY_CONTINENT,
-  // SET_RESET
 } from "../action/index";
 
 const initialState = {
@@ -17,7 +16,6 @@ const initialState = {
   activities: [],
   page: 1,
   order: "",
-  // resetName: ""
 };
 
 export const reducer = (state = initialState, action) => {
@@ -58,12 +56,6 @@ export const reducer = (state = initialState, action) => {
         ...state,
         order: action.payload,
       };
-
-    // case SET_RESET:
-    //     return {
-    //         ...state,
-    //         resetName: action.payload
-    //     }
 
     case ORDER_BY_NAME:
       let orderAAndZ =
@@ -117,7 +109,7 @@ export const reducer = (state = initialState, action) => {
       const change =
         action.payload === "All"
           ? countries
-          : countries.filter((con) => con.continent === action.payload);
+          : countries.filter((pais) => pais.continent === action.payload);
       return {
         ...state,
         allCountries: change,

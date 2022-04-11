@@ -10,15 +10,7 @@ const Detail = ({ id }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const countries = useSelector((state) => state.countries);
-  console.log(countries);
-  let acts = [];
-  if (countries.length > 1) {
-    for (var i = 1; i < countries.length; i++) {
-      acts.push(countries[i].name);
-    }
-  }
-  console.log(acts);
-  console.log(id);
+
   useEffect(() => {
     dispatch(getCountriesById(id));
   }, [dispatch, id]);
@@ -53,9 +45,9 @@ const Detail = ({ id }) => {
               <h3>Poblacion: {countries[0].population} habitantes</h3>
               <h3>
                 Actividades:
-                {acts.length > 1
-                  ? acts.map((l) => {
-                      return " " + l + ", ";
+                {countries[0].activities
+                  ? countries[0].activities.map((l) => {
+                      return " " + l.name + ", ";
                     })
                   : "Ninguna actividad"}
               </h3>

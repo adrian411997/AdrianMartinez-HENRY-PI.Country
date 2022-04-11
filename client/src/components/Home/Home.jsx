@@ -25,8 +25,19 @@ const Home = () => {
     dispatch(getAllCountries());
   }, [dispatch]);
 
-  const totalPages = (pageNumber) => {
+  const totalPages = (pageNumber, e) => {
     setCurrentPage(pageNumber);
+    //Resaltar la pagina actual
+    let active = "active";
+    let desactive = "";
+    let li = document.getElementById("listas").childNodes;
+
+    li.forEach((element, i) => {
+      element.className = desactive;
+      if (e.target === element) {
+        e.target.className = active;
+      }
+    });
   };
   const handleSelectContinent = (e) => {
     dispatch(FilterByContinent(e.target.value));
@@ -46,13 +57,13 @@ const Home = () => {
         <div className="bycontinent">
           <span>Filtrar por continente: </span>
           <select onChange={handleSelectContinent}>
-            <option value={"All"}>-- All --</option>
-            <option value={"Europe"}>-- Europe --</option>
-            <option value={"Asia"}>-- Asia --</option>
-            <option value={"Oceania"}>-- Oceania --</option>
-            <option value={"Africa"}>-- Africa --</option>
-            <option value={"Antarctic"}>-- Antarctic --</option>
-            <option value={"Americas"}>-- Americas --</option>
+            <option value={"All"}> Todos</option>
+            <option value={"Europe"}>Europa</option>
+            <option value={"Asia"}>Asia</option>
+            <option value={"Oceania"}>Oceania</option>
+            <option value={"Africa"}>Africa</option>
+            <option value={"Antarctic"}>Antartica</option>
+            <option value={"Americas"}>America</option>
           </select>
         </div>
       </div>

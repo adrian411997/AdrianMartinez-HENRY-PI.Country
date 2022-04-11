@@ -16,8 +16,8 @@ const OrderByName = () => {
     <div className="byname">
       <span>Ordenar por nombre: </span>
       <select onChange={handleSelectName}>
-        <option value={"asc"}>-- Ascendente --</option>
-        <option value={"desc"}>-- Descendente --</option>
+        <option value={"asc"}>Ascendente </option>
+        <option value={"desc"}>Descendente </option>
       </select>
     </div>
   );

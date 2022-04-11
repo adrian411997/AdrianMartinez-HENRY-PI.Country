@@ -6,8 +6,10 @@ import { useHistory } from "react-router-dom";
 import { getAllCountries, postActivities } from "../../redux/action";
 import "./Form.css";
 const Form = () => {
+  const [validate, setValidate] = useState({});
   const history = useHistory();
   const dispatch = useDispatch();
+  const [error, setError] = useState(true);
   const { allCountries } = useSelector((state) => state);
   const [form, setForm] = useState({
     name: "",
@@ -20,12 +22,34 @@ const Form = () => {
     dispatch(getAllCountries());
   }, [dispatch]);
 
+  const validation = (form) => {
+    let validations = {};
+    let regexName = /^[A-Z]+$/i;
+    if (!form.name.trim()) {
+      validations.name = "El campo esta vacio";
+    } else if (!regexName.test(form.name.trim())) {
+      validations.name = "El campo solo acepta letras";
+    }
+    if (!form.name.trim()) {
+      validations.difficulty = "El campo esta vacio";
+    }
+    if (!form.duration.trim()) {
+      validations.duration = "El campo esta vacio";
+    }
+    return validations;
+  };
+
   const handleOnchangeActivity = (e) => {
-    console.log(e.target.value);
     setForm({
       ...form,
       [e.target.name]: e.target.value,
     });
+    setValidate(
+      validation({
+        ...form,
+        [e.target.name]: e.target.value,
+      })
+    );
   };
 
   const handleSelectCountries = (e) => {
@@ -35,24 +59,42 @@ const Form = () => {
     });
   };
 
+  const handleSelectSeason = (e) => {
+    setForm({
+      ...form,
+      season: e.target.value,
+    });
+  };
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
-    let valores = Object.values(form);
-    if (valores.includes("")) {
-      alert("Hay campos que faltan completar");
-    } else {
-      dispatch(postActivities(form));
-      alert("Tourist activity successfully created");
-      setForm({
-        name: "",
-        difficulty: "",
-        duration: "",
-        season: "",
-        countries: [],
-      });
-    }
+    dispatch(postActivities(form));
+
+    alert("Tourist activity successfully created");
+    setForm({
+      name: "",
+      difficulty: "",
+      duration: "",
+      season: "",
+      countries: [],
+    });
+    // history.push('/home')
   };
+
+  useEffect(() => {
+    if (
+      form.name.length > 0 &&
+      form.difficulty.length > 0 &&
+      form.duration.length > 0 &&
+      form.season.length > 0 &&
+      form.countries.length > 0
+    ) {
+      setError(false);
+    } else {
+      setError(true);
+    }
+  }, [form, setError]);
+
   return (
     <div>
       <Header />
@@ -75,6 +117,7 @@ const Form = () => {
                 value={form.name}
                 onChange={handleOnchangeActivity}
               />
+              {validate.name && <p className="error">{validate.name}</p>}
             </div>
             <div className="difficulty">
               <label>Dificultad: </label>
@@ -87,6 +130,9 @@ const Form = () => {
                 value={form.difficulty}
                 onChange={handleOnchangeActivity}
               />
+              {validate.difficulty && (
+                <p className="error">{validate.difficulty}</p>
+              )}
             </div>
             <div className="duration">
               <label>Duracion: </label>
@@ -99,10 +145,13 @@ const Form = () => {
                 value={form.duration}
                 onChange={handleOnchangeActivity}
               />
+              {validate.duration && (
+                <p className="error">{validate.duration}</p>
+              )}
             </div>
             <div className="season">
               <label>Temporada: </label>
-              <select onChange={handleOnchangeActivity} name={"season"}>
+              <select onChange={handleSelectSeason} name={"season"}>
                 <option value={""}>Elija una temporada</option>
                 <option value={"Invierno"}>Invierno</option>
                 <option value={"Primavera"}>Primavera</option>
@@ -125,7 +174,9 @@ const Form = () => {
                 <li>{form.countries.map((el) => el + ", ")}</li>
               </ul>
               <div className="button">
-                <button type="submit">Crear</button>
+                <button type="submit" disabled={error}>
+                  Crear
+                </button>
               </div>
             </div>
           </div>

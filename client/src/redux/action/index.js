@@ -14,10 +14,10 @@ export const getAllCountries = () => {
   return (dispatch) => {
     axios
       .get("http://localhost:3001/countries")
-      .then((informationBack) => {
+      .then((resultado) => {
         return dispatch({
           type: GET_ALL_COUNTRIES,
-          payload: informationBack.data,
+          payload: resultado.data,
         });
       })
       .catch((error) => {
@@ -48,7 +48,7 @@ export const getCountriesById = (id) => {
       const detailAPI = await axios.get(
         `http://localhost:3001/countries/${id}`
       );
-      console.log(detailAPI);
+
       return dispatch({
         type: GET_COUNTRIES_BY_ID,
         payload: detailAPI.data,
