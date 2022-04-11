@@ -15,7 +15,7 @@ const postActivities = async (req, res, next) => {
         name: countries,
       },
     });
-    console.log(countriesIn);
+
     newActivity.addCountry(countriesIn);
     return res.json(newActivity);
   } catch (error) {

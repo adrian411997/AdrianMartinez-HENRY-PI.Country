@@ -24,10 +24,10 @@ const feedingDb = require("./src/utils/index.js");
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
   server.listen(3001, async () => {
-    console.log("%s listening at 3001"); // eslint-disable-line no-console
+    console.log("Servidor iniciado"); // eslint-disable-line no-console
     try {
       await feedingDb();
-      console.log("Countries in database");
+      console.log("Database Fedded");
     } catch (error) {
       console.log(error);
     }

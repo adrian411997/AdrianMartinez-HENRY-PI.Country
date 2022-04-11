@@ -40,21 +40,10 @@ const getCountriesById = async (req, res, next) => {
     const { id } = req.params;
     let allDataById = [];
     if (id) {
-      const DBCountries = await Country.findOne({
-        where: {
-          id: {
-            [Op.iLike]: `%${id}%`,
-          },
-        },
+      const DBCountries = await Country.findByPk(id, {
+        include: Activity,
       });
-      const DBActivity = await Activity.findAll({
-        attributes: ["id", "name", "difficulty", "duration", "season"],
-        through: {
-          attributes: [],
-        },
-      });
-      allDataById = [DBCountries, ...DBActivity];
-      console.log(allDataById);
+      allDataById = [DBCountries];
     }
     return res.json(allDataById);
   } catch (error) {
