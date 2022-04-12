@@ -8,7 +8,7 @@ const Paged = ({ countriesPerPage, allCountries, totalPages }) => {
   const paginado = Math.ceil(allCountries / countriesPerPage); //la cantidad de páginas es igual a la cantidad de perros dividido por la cantidad de perros por pagina
 
   for (let i = 1; i <= paginado; i++) {
-    //Push a mi arreglo vacio para que tome el valor de esa itreción
+    //Push a mi arreglo vacio para que tome el valor de esa iteración
     pageNumber.push(i);
   }
   return (

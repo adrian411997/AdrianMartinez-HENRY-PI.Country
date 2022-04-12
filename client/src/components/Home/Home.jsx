@@ -1,6 +1,10 @@
 import { React, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FilterByContinent, getAllCountries } from "../../redux/action";
+import {
+  FilterByContinent,
+  getAllCountries,
+  filterByActivities,
+} from "../../redux/action";
 import Header from "../Header/Header";
 import Cards from "../Cards/Cards";
 import OrderByName from "../Ordinances/OrderByName";
@@ -13,6 +17,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const { allCountries } = useSelector((state) => state);
   const [currentPage, setCurrentPage] = useState(1);
+  const [searchAct, setSearchAct] = useState("");
   const [countriesPerPage] = useState(9);
   const indexLastCountries = currentPage * countriesPerPage;
   const indexFirstCountries = indexLastCountries - countriesPerPage;
@@ -32,7 +37,7 @@ const Home = () => {
     let desactive = "";
     let li = document.getElementById("listas").childNodes;
 
-    li.forEach((element, i) => {
+    li.forEach((element) => {
       element.className = desactive;
       if (e.target === element) {
         e.target.className = active;
@@ -41,6 +46,17 @@ const Home = () => {
   };
   const handleSelectContinent = (e) => {
     dispatch(FilterByContinent(e.target.value));
+    console.log(e.target.value);
+  };
+  const handleOnchage = (e) => {
+    setSearchAct(e.target.value);
+  };
+
+  const handleSelectActivities = (e) => {
+    //dispatch(filterByActivities(e.target.value));
+    e.preventDefault();
+    dispatch(filterByActivities(searchAct));
+    setSearchAct("");
   };
   return (
     <div className="contenido">
@@ -57,7 +73,7 @@ const Home = () => {
         <div className="bycontinent">
           <span>Filtrar por continente: </span>
           <select onChange={handleSelectContinent}>
-            <option value={"All"}> Todos</option>
+            <option value={"Todos"}> Todos</option>
             <option value={"Europe"}>Europa</option>
             <option value={"Asia"}>Asia</option>
             <option value={"Oceania"}>Oceania</option>
@@ -65,6 +81,23 @@ const Home = () => {
             <option value={"Antarctic"}>Antartica</option>
             <option value={"Americas"}>America</option>
           </select>
+        </div>
+        <div className="acts">
+          {/*<select onChange={handleSelectActivities}>
+            <option value={"Todos"}>Todos</option>
+            <option value={"Acts"}>Solo con actividad</option>
+          </select>*/}
+          <div>
+            <button onClick={handleSelectActivities}>
+              <i className="fa fa-search"></i>
+            </button>
+
+            <input
+              className="input"
+              placeholder="Buscar por actividad"
+              onChange={handleOnchage}
+            />
+          </div>
         </div>
       </div>
       <div className="grid">

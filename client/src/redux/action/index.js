@@ -105,9 +105,9 @@ export const FilterByContinent = (continent) => {
     payload: continent,
   };
 };
-export const filterByActivities = (payload) => {
+export const filterByActivities = (activities) => {
   return {
     type: FILTER_BY_ACTIVITIES,
-    payload,
+    payload: activities,
   };
 };

@@ -8,6 +8,7 @@ import {
   SET_ORDER,
   ORDER_BY_POPULATION,
   FILTER_BY_CONTINENT,
+  FILTER_BY_ACTIVITIES,
 } from "../action/index";
 
 const initialState = {
@@ -107,12 +108,44 @@ export const reducer = (state = initialState, action) => {
     case FILTER_BY_CONTINENT:
       const countries = state.countries;
       const change =
-        action.payload === "All"
+        action.payload === "Todos"
           ? countries
           : countries.filter((pais) => pais.continent === action.payload);
       return {
         ...state,
         allCountries: change,
+      };
+    case FILTER_BY_ACTIVITIES:
+      const securityAllCountrys = state.countries;
+      const countriesWithActs = state.countries;
+      console.log(countriesWithActs);
+      /*const acts =
+        action.payload === "Todos"
+          ? securityAllCountrys
+          : countriesWithActs.filter((pais) =>
+              pais.activities.length !== 0 ? action.payload : null
+            );*/
+      let acts = [];
+      if (action.payload === "") {
+        acts = securityAllCountrys;
+      } else {
+        acts = [];
+        for (var i = 0; i < countriesWithActs.length; i++) {
+          if (countriesWithActs[i].activities.length > 0) {
+            for (var j = 0; j < countriesWithActs[i].activities.length; i++) {
+              console.log(countriesWithActs[i]);
+              console.log(countriesWithActs[i].activities[j]);
+              if (countriesWithActs[i].activities[j].name === action.payload) {
+                acts.push(countriesWithActs[i]);
+              }
+            }
+          }
+        }
+      }
+      console.log(acts);
+      return {
+        ...state,
+        allCountries: acts,
       };
     default:
       return state;

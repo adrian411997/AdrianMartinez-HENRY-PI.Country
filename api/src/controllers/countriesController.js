@@ -19,10 +19,7 @@ const getAllCountries = async (req, res, next) => {
       allData = responseByName;
     } else {
       const myInformationDb = await Country.findAll({
-        attributes: ["flag", "name", "continent", "id", "population"],
-        through: {
-          attributes: [],
-        },
+        include: Activity,
       });
       allData = myInformationDb;
     }

@@ -35,3 +35,16 @@
   padding: 10px;
   color: white;
 }
+.alt-pie {
+  background-image: linear-gradient(
+    -225deg,
+    #2cd8d5 0%,
+    #6b8dd6 48%,
+    #8e37d7 100%
+  );
+  text-align: center;
+  overflow: hidden;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}

@@ -37,7 +37,7 @@ const Detail = ({ id }) => {
               <h3>Continente: {countries[0].continent}</h3>
               <h3>
                 Sub-continente:
-                {countries[0].subcontinent === null
+                {countries[0].subcontinent !== null
                   ? " " + countries[0].subcontinent
                   : " Indefinido"}
               </h3>
